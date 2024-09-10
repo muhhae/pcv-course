@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 
 
 # write it yourself
-def method_1(img: cv2.UMat) -> cv2.UMat:
+def histogram_diy(img: cv2.UMat) -> cv2.UMat:
     histogram = np.zeros((256, 1), np.int32)
     for i in range(0, img.shape[0]):
         for j in range(0, img.shape[1]):
@@ -14,7 +14,7 @@ def method_1(img: cv2.UMat) -> cv2.UMat:
 
 
 # using library
-def method_2(img: cv2.UMat) -> cv2.UMat:
+def histogram_lib(img: cv2.UMat) -> cv2.UMat:
     histogram = cv2.calcHist([img], [0], None, [256], [0, 256])
     return histogram
 
@@ -22,7 +22,7 @@ def method_2(img: cv2.UMat) -> cv2.UMat:
 def main():
     img = cv2.imread("./apel.jpg")
 
-    histogram = method_2(img)
+    histogram = histogram_lib(img)
     plt.bar(np.arange(0, 256, 1), histogram[:, 0])
     plt.show()
 
